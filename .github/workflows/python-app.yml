@@ -50,3 +50,4 @@ jobs:
           tags: |
             gabbflor/aula_devops:latest
             gabbflor/aula_devops:${{github.sha}}
+# só pra dar rebuild
