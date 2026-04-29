@@ -21,7 +21,7 @@ RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 
 # copia da máquina na fase_1 e coloca nessa atual(fase_2)
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
-COPY --from=builder /usr/local/lib/uvicorn /usr/local/lib/uvicorn
+COPY --from=builder /usr/local/bin/uvicorn /usr/local/bin/uvicorn
 
 # copia a /app do projeto para a /app desse container
 COPY app/ ./app/
