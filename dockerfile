@@ -17,7 +17,7 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # criar novo user (pra n usar o root do linucis)
-RUN addgrup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
 
 # copia da máquina na fase_1 e coloca nessa atual(fase_2)
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
