@@ -38,9 +38,9 @@ jobs:
       needs: build
       steps:
         - name: Configurar docker na VM
-        uses: docker/build-push-action@v7.1.0
-        with:
-          push: true
-          tags: |
-            gabbflor/aula_devops:latest
-            gabbflor/aula_devops:${{github.sha}}
+          uses: docker/build-push-action@v7.1.0
+          with:
+            push: true
+            tags: |
+              gabbflor/aula_devops:latest
+              gabbflor/aula_devops:${{github.sha}}
