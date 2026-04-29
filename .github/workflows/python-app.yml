@@ -32,15 +32,15 @@ jobs:
       run: |
         PYTHONPATH=. pytest tests/ -v --tb=short
   
-    Imagem:
-      name: Construindo as imagens para docker
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - name: Configurar docker na VM
-          uses: docker/build-push-action@v7.1.0
-          with:
-            push: true
-            tags: |
-              gabbflor/aula_devops:latest
-              gabbflor/aula_devops:${{github.sha}}
+      Imagem:
+        name: Construindo as imagens para docker
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+          - name: Configurar docker na VM
+            uses: docker/build-push-action@v7.1.0
+            with:
+              push: true
+              tags: |
+                gabbflor/aula_devops:latest
+                gabbflor/aula_devops:${{github.sha}}
