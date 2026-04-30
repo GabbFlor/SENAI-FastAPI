@@ -41,7 +41,7 @@ jobs:
         uses: docker/login-action@v4.1.0
         with:
           username: ${{secrets.DOCKER_USER}}
-          password: ${{secrets.DOCKER_PWD}}
+          password: ${{secrets.DOCKER_TOKEN}}
       
       - name: Configurar docker na VM
         uses: docker/build-push-action@v7.1.0
