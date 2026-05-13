@@ -50,4 +50,18 @@ jobs:
           tags: |
             gabbflor/aula_devops:latest
             gabbflor/aula_devops:${{github.sha}}
+  DEPLOY:
+    name: Implementando na EC2
+    runs-on: ubuntu-latest
+    needs: Imagem
+
+    steps:
+      - name: Deploy na EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.EC2_HOST}}
+          username: ${{secrets.EC2_USER}}
+          key: ${{secrets.EC2_KEY}}
+          script:
+    
 # só pra dar rebuild
