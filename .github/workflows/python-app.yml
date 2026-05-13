@@ -65,4 +65,4 @@ jobs:
           script: |
             echo "teste"
     
-# só pra dar rebuild
+# só pra dar rebuildd
