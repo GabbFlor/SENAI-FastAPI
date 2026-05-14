@@ -59,6 +59,7 @@ jobs:
     if: github.ref == 'refs/heads/homologacao'
     runs-on: ubuntu-latest
     needs: Imagem
+    environment: homologacao
 
     steps:
       - name: Deploy na EC2 homologacao via SSH
@@ -88,6 +89,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: Imagem
+    environment: producao
 
     steps:
       - name: Deploy na EC2 produção via SSH
