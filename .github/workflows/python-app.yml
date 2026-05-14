@@ -2,9 +2,12 @@ name: Python application
 
 on:
   push:
-    branches: [ "fastAPI-hom" ]
+    branches: [ "main, homologacao" ]
   pull_request:
-    branches: [ "fastAPI-hom" ]
+    branches: [ "main, homologacao" ]
+
+env:
+  IMAGE_NAME: gabbflor/aula_devops
 
 jobs:
   build:
@@ -50,18 +53,20 @@ jobs:
           tags: |
             gabbflor/aula_devops:latest
             gabbflor/aula_devops:${{github.sha}}
-  DEPLOY:
-    name: Implementando na EC2
+  
+  DEPLOY_HOMOLOGACAO:
+    name: Implementando no ambiente de homologação
+    if: github.ref == 'refs/heads/homologacao'
     runs-on: ubuntu-latest
     needs: Imagem
 
     steps:
-      - name: Deploy na EC2 via SSH
+      - name: Deploy na EC2 homologacao via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{secrets.EC2_HOST}}
-          username: ${{secrets.EC2_USER}}
-          key: ${{secrets.EC2_KEY}}
+          host: ${{secrets.EC2_HOST_HOM}}
+          username: ${{secrets.EC2_USER_HOM}}
+          key: ${{secrets.EC2_KEY_HOM}}
           script: |
             echo "Iniciando deploy"
 
@@ -70,11 +75,40 @@ jobs:
             sudo docker stop aula_devops 2>/dev/null true
             sudo docker rm aula_devops 2>/dev/null true
 
-            sudo docker run --name aula_devops -d -p 80:8080 gabbflor/aula_devops:latest
+            sudo docker run --name aula_devops -d -p 8080:8080 gabbflor/aula_devops:latest
 
             sleep 5
 
             curl -f http://localhost/health || exit 1
 
-            echo "Deploy deu bão"
+            echo "Deploy na homologacao deu bão"
+
+  DEPLOY_PRODUCAO:
+    name: Implementando no ambiente de producao
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: Imagem
+
+    steps:
+      - name: Deploy na EC2 produção via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.EC2_HOST_PROD}}
+          username: ${{secrets.EC2_USER_PROD}}
+          key: ${{secrets.EC2_KEY_PROD}}
+          script: |
+            echo "Iniciando deploy"
+
+            sudo docker pull gabbflor/aula_devops:latest
+
+            sudo docker stop aula_devops 2>/dev/null true
+            sudo docker rm aula_devops 2>/dev/null true
+
+            sudo docker run --name aula_devops -d -p 8080:8080 gabbflor/aula_devops:latest
+
+            sleep 5
+
+            curl -f http://localhost/health || exit 1
+
+            echo "Deploy na producao deu bão"
 # só pra dar rebuildd
