@@ -97,7 +97,7 @@ jobs:
         with:
           host: ${{secrets.EC2_HOST_PROD}}
           username: ${{secrets.EC2_USER_PROD}}
-          key: ${{secrets.EC2_KEY_PROD}}
+          key: ${{secrets.ED2_KEY_PROD}}
           script: |
             echo "Iniciando deploy"
 
