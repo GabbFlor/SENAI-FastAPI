@@ -2,9 +2,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "main, homologacao" ]
+    branches: [ "main", "homologacao" ]
   pull_request:
-    branches: [ "main, homologacao" ]
+    branches: [ "main", "homologacao" ]
 
 env:
   IMAGE_NAME: gabbflor/aula_devops
