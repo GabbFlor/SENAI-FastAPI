@@ -76,7 +76,7 @@ jobs:
             sudo docker stop aula_devops 2>/dev/null true
             sudo docker rm aula_devops 2>/dev/null true
 
-            sudo docker run --name aula_devops -d -p 8080:8080 gabbflor/aula_devops:latest
+            sudo docker run --name aula_devops -d -p 80:8080 gabbflor/aula_devops:latest
 
             sleep 5
 
@@ -106,7 +106,7 @@ jobs:
             sudo docker stop aula_devops 2>/dev/null true
             sudo docker rm aula_devops 2>/dev/null true
 
-            sudo docker run --name aula_devops -d -p 8080:8080 gabbflor/aula_devops:latest
+            sudo docker run --name aula_devops -d -p 80:8080 gabbflor/aula_devops:latest
 
             sleep 5
 
